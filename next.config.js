@@ -1,7 +1,11 @@
 /** @type {import('next').NextConfig} */
+
 const nextConfig = {
   compiler: {
     styledComponents: true,
+  },
+  images: {
+    domains: ["example-apis.vercel.app"],
   },
   reactStrictMode: true,
   webpack(config) {
