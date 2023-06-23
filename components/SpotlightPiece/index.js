@@ -20,12 +20,14 @@ margin-left: 20%;
 `;
 
   export default function Spotlight({image, artist}){
+
     
+    const randomArt = Math.floor(Math.random() * pieces.length);
     return(
 <Body>
 
 <ImageContainer>
-<FavoriteButton/>
+<FavoriteButton></FavoriteButton>
 </ImageContainer>
 <h2>FamousArtist</h2>
 </Body>
