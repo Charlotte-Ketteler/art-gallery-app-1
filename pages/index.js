@@ -1,5 +1,3 @@
-
-import Spotlight from '../components/SpotlightPiece/index.js';
 import React from "react";
 import useSWR from "swr";
 import ArtPieces from "../components/ArtPieces/ArtPieces.js";

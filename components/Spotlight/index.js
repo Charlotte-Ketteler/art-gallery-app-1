@@ -6,7 +6,8 @@ export default function Spotlight({
   }) {
     return (
       <div>
-        <button></button>
+        <FavoriteButton
+        />
         <img src={image}></img>
         <h2>{artist}</h2>
       </div>
