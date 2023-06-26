@@ -1,6 +1,7 @@
 import GlobalStyle from "../styles";
 import useSWR from "swr";
 import Layout from "../components/Layout/Layout.js";
+import ArtPieces from "../components/ArtPieces/ArtPieces";
 
 export default function App({ Component, pageProps }) {
   const fetcher = (URL) => fetch(URL).then((response)=> response.json())
@@ -13,6 +14,7 @@ export default function App({ Component, pageProps }) {
     <>
       <GlobalStyle />
       <Component {...pageProps} pieces={data} />
+      <ArtPieces/>
       <Layout/>
     </>
   );
