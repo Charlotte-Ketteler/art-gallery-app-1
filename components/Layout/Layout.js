@@ -1,9 +1,9 @@
-import  Navbar from "../Layout/Layout.js";
+import  Navbar from "../Navbar/Navbar.js";
 
 export default function Layout({}){
     return (
         <div>
              <Navbar/>
         </div>
-    )
+    );
 }
