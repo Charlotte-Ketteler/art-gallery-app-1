@@ -44,6 +44,8 @@ export default function App({ Component, pageProps }) {
     }
   }
  
+  const favoriteArtPieces = artPiecesInfo.filter((piece) => piece.isFavorite);
+  
   return (
     <>
       <GlobalStyle />
@@ -51,7 +53,7 @@ export default function App({ Component, pageProps }) {
       {...pageProps} 
       pieces={data} 
       artPiecesInfo={artPiecesInfo}
-      onToggleFavorite={handleToggleFavorite} />
+      handleToggleFavorite={handleToggleFavorite} />
       <Layout/>
     </>
   );
