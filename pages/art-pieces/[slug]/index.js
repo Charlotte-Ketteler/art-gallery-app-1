@@ -15,6 +15,8 @@ export default function ArtPieceDetailsPage({
     }, [setSelectedArtPiece, pieces, slug]);}
 
     return (
+      <div>
+     
         <ArtPiecesDetails
           onBack={() => router.back()}
           image={selectedArtPiece.imageSource}
@@ -23,4 +25,5 @@ export default function ArtPieceDetailsPage({
           year={selectedArtPiece.year}
           genre={selectedArtPiece.genre}
         />
+        </div>
       );
