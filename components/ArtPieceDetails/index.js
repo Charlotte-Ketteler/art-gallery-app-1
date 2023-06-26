@@ -1,7 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
+import FavoriteButton from "../FavoriteButton";
 
-export default function ArtPiecesDetails({ pieces }){
+export default function ArtPiecesDetails({ pieces, isFavorite, onToggleFavorite }){
   
   return (
     <article>
@@ -14,6 +15,10 @@ export default function ArtPiecesDetails({ pieces }){
             width={140}
             height={230}
           />
+        <FavoriteButton
+          isFavorite={isFavorite}
+          onToggleFavorite={onToggleFavorite}
+        />
           <p>{pieces.artist}</p>
           <p>{pieces.year}</p>
           <p>{pieces.genre}</p>
