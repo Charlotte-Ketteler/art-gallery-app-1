@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import ArtPiecesDetails from "../../components/ArtPieceDetails/index.js";
+import ArtPiecesDetails from "../../../components/ArtPieceDetails/index.js";
 
 
 export default function ArtPieceDetailsPage({

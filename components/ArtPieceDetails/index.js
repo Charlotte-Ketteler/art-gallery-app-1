@@ -4,7 +4,7 @@ export default function ArtPiecesDetails({
     artist,
     year,
     genre,
-  })
+  }){
 
   return (
     <div>
@@ -19,3 +19,4 @@ export default function ArtPiecesDetails({
         </ul>
     </div>
   )
+}
