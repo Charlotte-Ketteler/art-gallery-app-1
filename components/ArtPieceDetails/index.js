@@ -13,6 +13,7 @@ export default function ArtPiecesDetails({
         </button>
         <image src={image}></image>
         <ul>
+            <li>{title}</li>
             <li>{artist}</li>
             <li>{year}</li>
             <li>{genre}</li>

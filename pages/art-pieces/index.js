@@ -1,11 +1,14 @@
-import ArtPieces from "../components/ArtPieces/ArtPieces.js";
+import ArtPieces from "../../components/ArtPieces/ArtPieces.js";
 
 export default function ArtPiecesPage({pieces}){
 
 return(
-    <ArtPieces pieces={data} />
+    <>
+    <h2>Art Pieces</h2>
+    <ArtPieces pieces={pieces} />
+    </>
 );
-    }
+ }
 
 
  
