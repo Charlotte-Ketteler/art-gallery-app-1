@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import FavoriteButton from "../FavoriteButton";
 
 export default function ArtPiecesDetails({ pieces }){
   
@@ -7,6 +8,10 @@ export default function ArtPiecesDetails({ pieces }){
     <article>
       <ul>
         <li key={pieces.slug}>
+        <FavoriteButton
+          isFavorite={isFavorite}
+          onToggleFavorite={onToggleFavorite}
+        />
           <h2>{pieces.name}</h2>
           <Image
             src={pieces.imageSource}

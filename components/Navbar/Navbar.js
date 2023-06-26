@@ -1,13 +1,13 @@
 import Link from "next/link";
-import { useRouter } from "next/router";
+//import { useRouter } from "next/router";
 const  Navbar= () => {
-    const router = useRouter();
+    //const router = useRouter();
 
     return (  
         <nav>
             <Link href={`/`} >Spotlight</Link>
             <Link href={`/art-pieces`}>Pieces</Link>
-            <Link href="/favorite">Favorite</Link>
+            <Link href="/favorites">Favorites</Link>
         </nav>
     );
 }
