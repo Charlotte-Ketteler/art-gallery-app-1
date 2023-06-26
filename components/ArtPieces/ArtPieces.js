@@ -1,11 +1,9 @@
-import React from 'react';
+import ArtPiecePreview from '../ArtPiecePreview/ArtPiecePreview';
 
 export default function ArtPieces({ pieces }) {
     return (
-        <ul>
-          {pieces?.map((piece) => (
-            <li key={piece.slug}><h2>{piece.name}</h2></li>
-          ))}
-        </ul>
+      <>
+        <ArtPiecePreview pieces={pieces}/>
+      </>
       );
     }
