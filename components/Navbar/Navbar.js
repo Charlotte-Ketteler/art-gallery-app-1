@@ -1,8 +1,9 @@
 import Link from "next/link";
 //import { useRouter } from "next/router";
-const  Navbar= () => {
+//const  Navbar= () => {
     //const router = useRouter();
-
+    
+    export default function Navbar() {
     return (  
         <nav>
             <Link href={`/`} >Spotlight</Link>
@@ -12,4 +13,3 @@ const  Navbar= () => {
     );
 }
  
-export default Navbar;

@@ -1,24 +1,18 @@
 import GlobalStyle from "../styles";
-import useSWR from "swr";
+import useSWR, { SWRConfig } from "swr";
 import Layout from "../components/Layout/Layout.js";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
-import { useImmerLocalStorageState } from "./useImmerLocalStorageState";
 
 
 
+const fetcher = (URL) => fetch(URL).then((response)=> response.json())
 
 export default function App({ Component, pageProps }) {
-  const router = useRouter();
-  const fetcher = (URL) => fetch(URL).then((response)=> response.json())
-  const { data, error } = useSWR('https://example-apis.vercel.app/api/art', fetcher);
+const { data, error } = useSWR('https://example-apis.vercel.app/api/art', fetcher);
+const [artPiecesInfo, setArtPiecesInfo] = useState([]);
 
-  const [artPiecesInfo, setArtPiecesInfo] = useImmerLocalStorageState(
-    "art-pieces-info",
-    { defaultValue: [] }
-  );
-
-  useEffect(() => {
+  /*useEffect(() => {
     const storedArtPiecesInfo = localStorage.getItem("artPiecesInfo");
     if (storedArtPiecesInfo) {
       setArtPiecesInfo(JSON.parse(storedArtPiecesInfo));
@@ -27,11 +21,8 @@ export default function App({ Component, pageProps }) {
 
   useEffect(() => {
     localStorage.setItem("artPiecesInfo", JSON.stringify(artPiecesInfo));
-  }, [artPiecesInfo]);
+  }, [artPiecesInfo]);*/
 
-
-  if (error) return <div>Error loading art pieces.</div>;
-  if (!data) return <div>Loading...</div>;
 
   function handleToggleFavorite(slug) {
     const artPiece = artPiecesInfo.find((piece) => piece.slug === slug);
@@ -40,7 +31,7 @@ export default function App({ Component, pageProps }) {
       setArtPiecesInfo(
         artPiecesInfo.map((pieceInfo) =>
           pieceInfo.slug === slug
-            ? { slug, isFavorite: !pieceInfo.isFavorite }
+            ? { ...pieceInfo, isFavorite: !pieceInfo.isFavorite }
             : pieceInfo
         )
       );
@@ -49,7 +40,7 @@ export default function App({ Component, pageProps }) {
     }
   }
  
-  const favoriteArtPieces = artPiecesInfo.filter((piece) => piece.isFavorite);
+  //const favoriteArtPieces = artPiecesInfo.filter((piece) => piece.isFavorite);
 
   function addComment(slug, newComment) {
     const artPiece = artPiecesInfo.find((piece) => piece.slug === slug);
@@ -76,6 +67,7 @@ export default function App({ Component, pageProps }) {
   return (
     <>
       <GlobalStyle />
+      <SWRConfig value={{ fetcher }}>
       <Component 
       {...pageProps} 
       pieces={data} 
@@ -83,6 +75,7 @@ export default function App({ Component, pageProps }) {
       onToggleFavorite={handleToggleFavorite}
       addComment={addComment} />
       <Layout/>
+      </SWRConfig>
     </>
   );
 }

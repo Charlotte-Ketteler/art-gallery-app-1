@@ -3,19 +3,23 @@ import ArtPiecesDetails from "../../../components/ArtPieceDetails/index.js";
 
 
 
-export default function ArtPieceDetailsPage({ pieces }) {
+export default function ArtPieceDetailsPage({ pieces, artPiecesInfo,
+  onToggleFavorite }) {
     //const [selectedArtPiece, setSelectedArtPiece] = useState(null);
     const router = useRouter();
+    if (!pieces) return <div>Loading...</div>;
     const { slug } = router.query;
-  
-    if (pieces === undefined) return null;
-    const selectedArtPiece = pieces?.find((piece) => piece.slug === slug);
+    const artPiece = pieces.find((piece) => piece.slug === slug);
+    const artPieceInfo = artPiecesInfo.find(
+      (artPieceInfo) => artPieceInfo.slug === slug
+    ) ?? { isFavorite: false };
 
     return (
-      <div>
+      
         <ArtPiecesDetails
-          pieces={selectedArtPiece}
+          {...artPiece}
+          isFavorite={artPieceInfo.isFavorite}
+          onToggleFavorite={onToggleFavorite}
         />
-        </div>
       );
     }

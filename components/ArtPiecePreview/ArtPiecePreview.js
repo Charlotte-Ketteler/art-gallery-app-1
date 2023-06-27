@@ -2,39 +2,31 @@ import Image from "next/image";
 import Link from "next/link";
 import FavoriteButton from "../FavoriteButton/index.js";
 
-export default function ArtPiecePreview({ pieces, artPiecesInfo = [], onToggleFavorite }) {
-  const isFavorite = (slug) => {
-    const artPiece = artPiecesInfo.find((piece) => piece.slug === slug);
-    return artPiece ? artPiece.isFavorite : false;
-  };
-
-  const handleToggleFavorite = (slug) => {
-    if (typeof onToggleFavorite === 'function') {
-      onToggleFavorite(slug);
-    }
-  };
-  console.log(onToggleFavorite);
+export default function ArtPiecePreview({
+  artPiece,
+  isFavorite,
+  onToggleFavorite,
+}) {
   return (
-    <article>
-      <ul>
-        {pieces?.map((piece) => {
-          const favorite = isFavorite(piece.slug);
-
-          return (
-            <li key={piece.slug}>
-              <h2>{piece.name}</h2>
-              <Image src={piece.imageSource} alt={piece.name} width={140} height={230} />
-              <FavoriteButton
-                isFavorite={favorite}
-                handleToggleFavorite={() => handleToggleFavorite(piece.slug)}
-              />
-              <p>{piece.artist}</p>
-              <Link href={`/art-pieces/${piece.slug}`}>Weitere Details</Link>
-            </li>
-          );
-        })}
-      </ul>
-    </article>
+    <div>
+      <h2>{artPiece.name}</h2>
+      <p>by {artPiece.artist}</p>
+      <Link href={`/art-pieces/${artPiece.slug}`}>
+        <Image
+          src={artPiece.imageSource}
+          width={480}
+          height={608}
+          alt={artPiece.name}
+        />
+      </Link>
+      <div>
+        <FavoriteButton
+          isFavorite={isFavorite}
+          onToggleFavorite={() => onToggleFavorite(artPiece.slug)}
+        />
+      </div>
+    </div>
   );
 }
+  
 
