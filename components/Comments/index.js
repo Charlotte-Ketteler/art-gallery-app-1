@@ -3,16 +3,18 @@ export default function Comments({ comments }) {
     return (
         <>
         <h2>Comments</h2>
-        {comments.map((commentEntry) => (
+        {comments.map((commentEntry) => {
+        const dateTime = new Date(commentEntry.datetime);
+        return (
           <comment key={commentEntry.comment}>
             <p>
-              on {commentEntry.datetime.toLocaleDateString()} at{" "}
-              {commentEntry.datetime.getHours()}:
-              {commentEntry.datetime.getMinutes()}
+              on {dateTime.toLocaleDateString()} at {dateTime.getHours()}:
+              {dateTime.getMinutes()}
             </p>
             <p>{commentEntry.comment}</p>
           </comment>
-        ))}
+        );
+      })}
       </>
     );
   }

@@ -1,62 +1,48 @@
 import GlobalStyle from "../styles";
 import useSWR, { SWRConfig } from "swr";
 import Layout from "../components/Layout/Layout.js";
-import { useEffect, useState } from "react";
-import { useRouter } from "next/router";
-
-
+import { useImmerLocalStorageState } from "../lib/hook/useImmerLocalStorageState";
 
 const fetcher = (URL) => fetch(URL).then((response)=> response.json())
 
 export default function App({ Component, pageProps }) {
 const { data, error } = useSWR('https://example-apis.vercel.app/api/art', fetcher);
-const [artPiecesInfo, setArtPiecesInfo] = useState([]);
+const [artPiecesInfo, setArtPiecesInfo] = = useImmerLocalStorageState(
+  "art-pieces-info",
+  { defaultValue: [] }
+);
 
 function handleToggleFavorite(slug) {
-    const artPiece = artPiecesInfo.find((piece) => piece.slug === slug);
-
-    if (artPiece) {
-      setArtPiecesInfo(
-        artPiecesInfo.map((pieceInfo) =>
-          pieceInfo.slug === slug
-            ? { ...pieceInfo, isFavorite: !pieceInfo.isFavorite }
-            : pieceInfo
-        )
+  updateArtPiecesInfo((draft) => {
+    const artPieceInfo = draft.find(
+      (artPieceInfo) => artPieceInfo.slug === slug
       );
-    } else {
-      setArtPiecesInfo([...artPiecesInfo, { slug, isFavorite: true }]);
-    }
+    
+      if (artPieceInfo) {
+        artPieceInfo.isFavorite = !artPieceInfo.isFavorite;
+      } else {
+        draft.push({ slug, isFavorite: true });
+      }
+    });
   }
  
   function handleSubmitComment(slug, comment) {
-    const artPieceInfo = artPiecesInfo.find(
-      (artPieceInfo) => artPieceInfo.slug === slug
-    );
+    updateArtPiecesInfo((draft) => {
+      const artPieceInfo = draft.find(
+        (artPieceInfo) => artPieceInfo.slug === slug
+      );
 
     if (artPieceInfo) {
-      setArtPiecesInfo(
-        artPiecesInfo.map((artPiece) =>
-          artPiece.slug === slug
-            ? {
-                ...artPiece,
-                comments: [
-                  ...artPiece.comments,
-                  { comment, datetime: new Date() },
-                ],
-              }
-            : artPiece
-        )
-      );
-    } else {
-      setArtPiecesInfo([
-        ...artPiecesInfo,
-        {
+        if (!artPieceInfo.comments) artPieceInfo.comments = [];
+        artPieceInfo.comments.push({ comment, datetime: new Date() });
+      } else {
+        draft.push({
           slug,
           isFavorite: false,
           comments: [{ comment, datetime: new Date() }],
-        },
-      ]);
-    }
+        });
+      }
+    });
   }
   
   return (
