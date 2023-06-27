@@ -7,7 +7,7 @@ const fetcher = (URL) => fetch(URL).then((response)=> response.json())
 
 export default function App({ Component, pageProps }) {
 const { data, error } = useSWR('https://example-apis.vercel.app/api/art', fetcher);
-const [artPiecesInfo, setArtPiecesInfo] = useImmerLocalStorageState(
+const [artPiecesInfo, updateArtPiecesInfo] = useImmerLocalStorageState(
   "art-pieces-info",
   { defaultValue: [] }
 );
