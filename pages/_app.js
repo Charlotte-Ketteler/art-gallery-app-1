@@ -12,19 +12,7 @@ export default function App({ Component, pageProps }) {
 const { data, error } = useSWR('https://example-apis.vercel.app/api/art', fetcher);
 const [artPiecesInfo, setArtPiecesInfo] = useState([]);
 
-  /*useEffect(() => {
-    const storedArtPiecesInfo = localStorage.getItem("artPiecesInfo");
-    if (storedArtPiecesInfo) {
-      setArtPiecesInfo(JSON.parse(storedArtPiecesInfo));
-    }
-  }, []);
-
-  useEffect(() => {
-    localStorage.setItem("artPiecesInfo", JSON.stringify(artPiecesInfo));
-  }, [artPiecesInfo]);*/
-
-
-  function handleToggleFavorite(slug) {
+function handleToggleFavorite(slug) {
     const artPiece = artPiecesInfo.find((piece) => piece.slug === slug);
 
     if (artPiece) {
@@ -40,26 +28,33 @@ const [artPiecesInfo, setArtPiecesInfo] = useState([]);
     }
   }
  
-  //const favoriteArtPieces = artPiecesInfo.filter((piece) => piece.isFavorite);
+  function handleSubmitComment(slug, comment) {
+    const artPieceInfo = artPiecesInfo.find(
+      (artPieceInfo) => artPieceInfo.slug === slug
+    );
 
-  function addComment(slug, newComment) {
-    const artPiece = artPiecesInfo.find((piece) => piece.slug === slug);
-    if (artPiece) {
+    if (artPieceInfo) {
       setArtPiecesInfo(
-        artPiecesInfo.map((pieceInfo) => {
-          if (pieceInfo.slug === slug) {
-            return pieceInfo.comments
-              ? { ...pieceInfo, comments: [...pieceInfo.comments, newComment] }
-              : { ...pieceInfo, comments: [newComment] };
-          } else {
-            return pieceInfo;
-          }
-        })
+        artPiecesInfo.map((artPiece) =>
+          artPiece.slug === slug
+            ? {
+                ...artPiece,
+                comments: [
+                  ...artPiece.comments,
+                  { comment, datetime: new Date() },
+                ],
+              }
+            : artPiece
+        )
       );
     } else {
       setArtPiecesInfo([
         ...artPiecesInfo,
-        { slug, isFavorite: false, comments: [newComment] },
+        {
+          slug,
+          isFavorite: false,
+          comments: [{ comment, datetime: new Date() }],
+        },
       ]);
     }
   }
@@ -73,7 +68,7 @@ const [artPiecesInfo, setArtPiecesInfo] = useState([]);
       pieces={data} 
       artPiecesInfo={artPiecesInfo}
       onToggleFavorite={handleToggleFavorite}
-      addComment={addComment} />
+      onSubmitComment={handleSubmitComment} />
       <Layout/>
       </SWRConfig>
     </>
