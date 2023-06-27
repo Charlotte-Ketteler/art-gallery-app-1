@@ -1,8 +1,11 @@
 import Image from "next/image";
 import Link from "next/link";
 import FavoriteButton from "../FavoriteButton";
+import CommentForm from "../CommentForm";
+import Comments from "../Comments/index.js";
 
-export default function ArtPiecesDetails({ pieces, isFavorite, onToggleFavorite }){
+export default function ArtPiecesDetails({ pieces, isFavorite, onToggleFavorite, addComment,
+  comments }){
   
   return (
     <article>
@@ -25,6 +28,8 @@ export default function ArtPiecesDetails({ pieces, isFavorite, onToggleFavorite 
           <Link href={`/art-pieces`}>←</Link>
         </li>
       </ul>
+      {comments && <Comments comments={comments} />}
+      <CommentForm addComment={addComment} />
     </article>
   );
 }

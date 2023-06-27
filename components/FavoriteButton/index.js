@@ -7,7 +7,7 @@ export default function FavoriteButton({ isFavorite, onToggleFavorite }) {
       onClick={onToggleFavorite}
       aria-label={isFavorite ? "unlike" : "like"}
     >
-      I like
+       <Image src="/public/heart.svg" width={40} height={40} alt="" />
     </button>
   );
 }
