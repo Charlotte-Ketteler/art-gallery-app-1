@@ -7,7 +7,7 @@ const  Navbar= () => {
         <nav>
             <Link href={`/`} >Spotlight</Link>
             <Link href={`/art-pieces`}>Pieces</Link>
-            <Link href="/favorites">Favorites</Link>
+            <Link href={`/favorites`}>Favorites</Link>
         </nav>
     );
 }

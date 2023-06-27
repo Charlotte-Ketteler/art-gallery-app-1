@@ -3,9 +3,8 @@ import ArtPieces from "../../components/ArtPieces/ArtPieces.js";
 export default function FavoritesPage({
   pieces,
   artPiecesInfo,
-  onArtPiecesInfo,
+  //onArtPiecesInfo,
   onToggleFavorite,
-  handleToggleFavorite,
 }) {
   const favorites = pieces.filter((piece) =>
     artPiecesInfo.find(
@@ -16,10 +15,9 @@ export default function FavoritesPage({
   return (
     <ArtPieces
       pieces={favorites}
-      onArtPiecesInfo={onArtPiecesInfo}
+      //onArtPiecesInfo={onArtPiecesInfo}
       artPiecesInfo={artPiecesInfo}
       onToggleFavorite={onToggleFavorite}
-      handleToggleFavorite={handleToggleFavorite}
     />
   );
 }

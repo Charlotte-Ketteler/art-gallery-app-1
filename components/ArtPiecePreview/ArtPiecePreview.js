@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import FavoriteButton from "../FavoriteButton/index";
+import FavoriteButton from "../FavoriteButton/index.js";
 
 export default function ArtPiecePreview({ pieces, artPiecesInfo = [], onToggleFavorite }) {
   const isFavorite = (slug) => {
@@ -8,6 +8,12 @@ export default function ArtPiecePreview({ pieces, artPiecesInfo = [], onToggleFa
     return artPiece ? artPiece.isFavorite : false;
   };
 
+  const handleToggleFavorite = (slug) => {
+    if (typeof onToggleFavorite === 'function') {
+      onToggleFavorite(slug);
+    }
+  };
+  console.log(onToggleFavorite);
   return (
     <article>
       <ul>
@@ -20,7 +26,7 @@ export default function ArtPiecePreview({ pieces, artPiecesInfo = [], onToggleFa
               <Image src={piece.imageSource} alt={piece.name} width={140} height={230} />
               <FavoriteButton
                 isFavorite={favorite}
-                onToggleFavorite={() => handleToggleFavorite(piece.slug)}
+                handleToggleFavorite={() => handleToggleFavorite(piece.slug)}
               />
               <p>{piece.artist}</p>
               <Link href={`/art-pieces/${piece.slug}`}>Weitere Details</Link>

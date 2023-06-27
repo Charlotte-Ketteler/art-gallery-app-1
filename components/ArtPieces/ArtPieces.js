@@ -6,7 +6,8 @@ export default function ArtPieces({ pieces, artPiecesInfo, onToggleFavorite }) {
         <ArtPiecePreview 
           pieces={pieces}
           artPiecesInfo={artPiecesInfo}
-          onToggleFavorite={onToggleFavorite}/>
+          onToggleFavorite={onToggleFavorite}
+          />
       </>
       );
     }
