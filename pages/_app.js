@@ -1,13 +1,13 @@
 import GlobalStyle from "../styles";
 import useSWR, { SWRConfig } from "swr";
 import Layout from "../components/Layout/Layout.js";
-import { useImmerLocalStorageState } from "../lib/hook/useImmerLocalStorageState";
+import { useImmerLocalStorageState } from "../lib/hook/useImmerLocalStorageState.js";
 
 const fetcher = (URL) => fetch(URL).then((response)=> response.json())
 
 export default function App({ Component, pageProps }) {
 const { data, error } = useSWR('https://example-apis.vercel.app/api/art', fetcher);
-const [artPiecesInfo, setArtPiecesInfo] = = useImmerLocalStorageState(
+const [artPiecesInfo, setArtPiecesInfo] = useImmerLocalStorageState(
   "art-pieces-info",
   { defaultValue: [] }
 );
